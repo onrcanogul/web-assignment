@@ -45,9 +45,9 @@ public class CrudService<T, TDto>(IRepository<T> repository, IMapper mapper, IUn
         await unitOfWork.CommitAsync();
         return ServiceResponse<TDto>.Success(dto, StatusCodes.Status201Created);
     }
-    public async Task<ServiceResponse<TDto>> UpdateAsync(TDto dto)
+    public async Task<ServiceResponse<TDto>> UpdateAsync(Guid id, TDto dto)
     {
-        var entity = await repository.GetFirstOrDefaultAsync(x => x.Id == dto.Id);
+        var entity = await repository.GetFirstOrDefaultAsync(x => x.Id == id);
         if (entity == null) throw new NotFoundException(localize["NotFound"].Value);
         entity = mapper.Map(dto, entity);
         repository.Update(entity);

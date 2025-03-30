@@ -21,6 +21,6 @@ public interface ICrudService<T, TDto>
         Func<IQueryable<T>, IQueryable<T>>? includeProperties = null,
         bool disableTracking = true);
     Task<ServiceResponse<TDto>> CreateAsync(TDto dto);
-    Task<ServiceResponse<TDto>> UpdateAsync(TDto dto);
+    Task<ServiceResponse<TDto>> UpdateAsync(Guid id, TDto dto);
     Task<ServiceResponse<NoContent>> DeleteAsync(Guid id);
 }
